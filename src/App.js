@@ -1,8 +1,9 @@
 import "./App.css";
 import React, {useState} from "react";
-import ListItem from "./ListItem";
-import Cart from "./Cart";
+import ListItem from "./Components/ListItem";
+import Cart from "./Components/Cart";
 import { CartContext } from "./Context/CartContext";
+import Navbar from "./Components/Navbar";
 
 function App() {
   const [qty, setQty] = useState(0);
@@ -14,6 +15,7 @@ function App() {
       <CartContext.Provider
         value={{qty, setQty, cartItem, setCartItem, cartQty, setCartQty}}
       >
+        <Navbar />
         <h1>Menu</h1>
         <ListItem />
         <Cart />
