@@ -31,6 +31,7 @@ function ListItem() {
       let prevState = [...menu];
       let prevElement = { ...prevState[i] };
       prevElement.cartQty += prevElement.selection;
+      prevElement.selection = 0;
       prevState[i] = prevElement;
       setMenu(prevState);
     }
@@ -59,9 +60,9 @@ function ListItem() {
                 +
               </button>
             </div>
-            <button className="button-add" onClick={() => handleAddToCart(i)}>
+            {menuItem.selection >= 1 ? <button className="button-add" onClick={() => handleAddToCart(i)}>
               Add
-            </button>
+            </button> : null}
           </div>
         </div>
       ))}
