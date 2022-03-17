@@ -1,27 +1,22 @@
 import React, { useContext } from "react";
 import { CartContext } from "../Context/CartContext";
-import Button from "react-bootstrap/Button";
 
 function Cart() {
-  const { cartQty, setCartQty, cartItem, setCartItem } =
-    useContext(CartContext);
-
-  const clearCartItem = () => {
-    setCartItem("");
-    setCartQty(0);
-  };
-
-  const cartItemElement = (
-    <div>
-      <p>{`${cartItem} ${cartQty}`}</p>
-      <Button onClick={clearCartItem}>Clear</Button>
-    </div>
-  );
+  const { menu } = useContext(CartContext);
 
   return (
     <>
       <h1>Cart</h1>
-      {cartQty >= 1 ? cartItemElement : null}
+      {menu.map((cartItem, i) => (
+        <div>
+          {cartItem.cartQty > 0 ? (
+            <p>
+              <strong>{cartItem.name}</strong> x{cartItem.cartQty} {cartItem.price * cartItem.cartQty} zł
+            </p>
+          ) : null}
+          
+        </div>
+      ))}
     </>
   );
 }

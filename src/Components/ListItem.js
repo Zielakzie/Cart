@@ -1,33 +1,18 @@
-import React, { useContext, useState } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
+import React, { useContext } from "react";
 import { CartContext } from "../Context/CartContext";
-import pizzaPepperoni from "../img/pizza-pepperoni.png";
-import pizzaHawajska from "../img/pizza-hawajska.png";
+import "bootstrap/dist/css/bootstrap.min.css";
+
 import "./ListItem.css";
 
 function ListItem() {
-  const [menu, setMenu] = useState([
-    {
-      name: "Pizza Pepperoni",
-      price: 29.99,
-      image: pizzaPepperoni,
-      qty: 0,
-    },
-    {
-      name: "Pizza Hawajska",
-      price: 30.99,
-      image: pizzaHawajska,
-      qty: 0,
-    },
-  ]);
-
-  const addToCart = <button className="button-add">Add</button>;
+  const { menu, setMenu } =
+    useContext(CartContext);
 
   const substraction = (i) => {
-    if (menu[i].qty > 0) {
+    if (menu[i].selection > 0) {
       let prevState = [...menu];
       let prevElement = { ...prevState[i] };
-      prevElement.qty--;
+      prevElement.selection--;
       prevState[i] = prevElement;
       setMenu(prevState);
     }
@@ -36,10 +21,21 @@ function ListItem() {
   const addition = (i) => {
     let prevState = [...menu];
     let prevElement = { ...prevState[i] };
-    prevElement.qty++;
+    prevElement.selection++;
     prevState[i] = prevElement;
     setMenu(prevState);
   };
+
+  const handleAddToCart = (i) => {
+    if (menu[i].selection >= 1) {
+      let prevState = [...menu];
+      let prevElement = { ...prevState[i] };
+      prevElement.cartQty += prevElement.selection;
+      prevState[i] = prevElement;
+      setMenu(prevState);
+    }
+  };
+
 
   return (
     <>
@@ -55,15 +51,17 @@ function ListItem() {
           </div>
           <div className="d-flex flex-column justify-content-between">
             <div className="d-flex">
-              <button className="button-qty" onClick={() => substraction(i)}>
+              <button className="button-selection" onClick={() => substraction(i)}>
                 -
               </button>
-              <div>{menuItem.qty}</div>
-              <button className="button-qty" onClick={() => addition(i)}>
+              <div>{menuItem.selection}</div>
+              <button className="button-selection" onClick={() => addition(i)}>
                 +
               </button>
             </div>
-            {menuItem.qty >= 1 ? addToCart : null}
+            <button className="button-add" onClick={() => handleAddToCart(i)}>
+              Add
+            </button>
           </div>
         </div>
       ))}
