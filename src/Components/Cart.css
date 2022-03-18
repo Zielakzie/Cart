@@ -1,0 +1,41 @@
+.cart-btn {
+  width: 30px;
+  height: 30px;
+  margin: 4px;
+  cursor: pointer;
+}
+
+.cart-icon {
+  width: 12px;
+  height: 13px;
+}
+
+.icon-bg {
+  background-color: #5EBB56;
+  border-radius: 16px;
+  color: white;
+  margin: 4px;
+}
+
+.cart-item {
+  margin: 10px 40px;
+  font-weight: bold;
+}
+
+.cart-item p {
+  margin: 0;
+}
+
+.divider {
+  height: 1px;
+  width: 360px;
+  background-color: black;
+  margin: auto;
+}
+
+.summary {
+  margin-top: 20px;
+  margin-right: 38px;
+  text-align: right;
+  font-weight: bold;
+}
