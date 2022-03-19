@@ -5,7 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./ListItem.css";
 
 function ListItem() {
-  const { menu, setMenu } =
+  const { menu, setMenu, notyfication, setNotyfication  } =
     useContext(CartContext);
 
   const substraction = (i) => {
@@ -30,6 +30,8 @@ function ListItem() {
     if (menu[i].selection >= 1) {
       let prevState = [...menu];
       let prevElement = { ...prevState[i] };
+      let prevNotyfication = notyfication + prevElement.selection
+      setNotyfication(prevNotyfication);     
       prevElement.cartQty += prevElement.selection;
       prevElement.selection = 0;
       prevState[i] = prevElement;

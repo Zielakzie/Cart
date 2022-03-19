@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 function Cart() {
-  const { menu, setMenu } = useContext(CartContext);
+  const { menu, setMenu, notyfication, setNotyfication } = useContext(CartContext);
 
   //Total amount
   let sum = 0;
@@ -27,6 +27,7 @@ function Cart() {
       prevElement.cartQty--;
       prevState[i] = prevElement;
       setMenu(prevState);
+      setNotyfication(notyfication - 1);
     }
   };
 
@@ -36,11 +37,14 @@ function Cart() {
     prevElement.cartQty++;
     prevState[i] = prevElement;
     setMenu(prevState);
+    setNotyfication(notyfication + 1);
   };
 
   const clearCartItem = (i) => {
     let prevState = [...menu];
-    let prevElement = { ...prevState[i] };
+    let prevElement = { ...prevState[i] }
+    let prevNotyfication = notyfication - prevElement.cartQty ;
+    setNotyfication(prevNotyfication)
     prevElement.cartQty = 0
     prevState[i] = prevElement;
     setMenu(prevState);
