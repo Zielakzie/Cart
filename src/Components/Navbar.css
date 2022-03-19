@@ -39,3 +39,8 @@ nav {
 .notification-dot p {
   font-weight: bold;
 }
+
+a, a:hover {
+  color: white;
+  text-decoration: none;
+}
