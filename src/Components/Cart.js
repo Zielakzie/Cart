@@ -50,32 +50,40 @@ function Cart() {
     setMenu(prevState);
   }
 
+  const renderCheck = notyfication
+
+  const cartItemsList = () => {
+    return  <>{menu.map((cartItem, i) => (
+      <div key={cartItem.name}>
+        {cartItem.cartQty > 0 ? (
+          <div className="d-flex justify-content-between align-items-center cart-item">
+            <p>{`${cartItem.name} x${cartItem.cartQty}`}</p>
+            <p>{`${Math.floor(cartItem.price * cartItem.cartQty * 100) / 100} zł`}</p>
+            <div className="d-flex flex-row">
+              <button className="cart-btn" onClick={() => substraction(i)}>
+                -
+              </button>
+              <button className="cart-btn" onClick={() => addition(i)}>
+                +
+              </button>
+              <div className="icon-bg cart-btn d-flex justify-content-center align-items-center" onClick={() => clearCartItem(i)}>
+                <FontAwesomeIcon icon={faTrash} className="cart-icon" />
+              </div>
+            </div>
+          </div>
+        ) : null}
+      </div>
+    ))}
+    <div className="divider"></div>
+    <p className="summary">{summary()}</p>
+    </>
+  }
+
   return (
     <>
       <h1>Cart</h1>
-      {menu.map((cartItem, i) => (
-        <div key={cartItem.name}>
-          {cartItem.cartQty > 0 ? (
-            <div className="d-flex justify-content-between align-items-center cart-item">
-              <p>{`${cartItem.name} x${cartItem.cartQty}`}</p>
-              <p>{`${Math.floor(cartItem.price * cartItem.cartQty * 100) / 100} zł`}</p>
-              <div className="d-flex flex-row">
-                <button className="cart-btn" onClick={() => substraction(i)}>
-                  -
-                </button>
-                <button className="cart-btn" onClick={() => addition(i)}>
-                  +
-                </button>
-                <div className="icon-bg cart-btn d-flex justify-content-center align-items-center" onClick={() => clearCartItem(i)}>
-                  <FontAwesomeIcon icon={faTrash} className="cart-icon" />
-                </div>
-              </div>
-            </div>
-          ) : null}
-        </div>
-      ))}
-      <div className="divider"></div>
-      <p className="summary">{summary()}</p>
+     {renderCheck > 0 ? cartItemsList() : <p>Add something :)</p>}
+
     </>
   );
 }

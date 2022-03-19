@@ -5,7 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./ListItem.css";
 
 function ListItem() {
-  const { menu, setMenu, notyfication, setNotyfication  } =
+  const { menu, setMenu, notyfication, setNotyfication } =
     useContext(CartContext);
 
   const substraction = (i) => {
@@ -30,8 +30,8 @@ function ListItem() {
     if (menu[i].selection >= 1) {
       let prevState = [...menu];
       let prevElement = { ...prevState[i] };
-      let prevNotyfication = notyfication + prevElement.selection
-      setNotyfication(prevNotyfication);     
+      let prevNotyfication = notyfication + prevElement.selection;
+      setNotyfication(prevNotyfication);
       prevElement.cartQty += prevElement.selection;
       prevElement.selection = 0;
       prevState[i] = prevElement;
@@ -39,9 +39,9 @@ function ListItem() {
     }
   };
 
-
   return (
     <>
+      <h1>Menu</h1>
       {menu.map((menuItem, i) => (
         <div
           key={i}
@@ -54,7 +54,10 @@ function ListItem() {
           </div>
           <div className="d-flex flex-column justify-content-between">
             <div className="d-flex">
-              <button className="button-selection" onClick={() => substraction(i)}>
+              <button
+                className="button-selection"
+                onClick={() => substraction(i)}
+              >
                 -
               </button>
               <div>{menuItem.selection}</div>
@@ -62,9 +65,11 @@ function ListItem() {
                 +
               </button>
             </div>
-            {menuItem.selection >= 1 ? <button className="button-add" onClick={() => handleAddToCart(i)}>
-              Add
-            </button> : null}
+            {menuItem.selection >= 1 ? (
+              <button className="button-add" onClick={() => handleAddToCart(i)}>
+                Add
+              </button>
+            ) : null}
           </div>
         </div>
       ))}

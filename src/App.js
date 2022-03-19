@@ -1,5 +1,6 @@
 import "./App.css";
 import React, { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ListItem from "./Components/ListItem";
 import Cart from "./Components/Cart";
 import { CartContext } from "./Context/CartContext";
@@ -29,14 +30,19 @@ function App() {
   const [notyfication, setNotyfication] = useState(0);
 
   return (
-    <div className="App">
-      <CartContext.Provider value={{ menu, setMenu, notyfication, setNotyfication }}>
-        <Navbar />
-        <h1>Menu</h1>
-        <ListItem />
-        <Cart />
-      </CartContext.Provider>
-    </div>
+    <Router>
+      <div className="App">
+        <CartContext.Provider
+          value={{ menu, setMenu, notyfication, setNotyfication }}
+        >
+          <Navbar />
+          <Routes>
+          <Route exact path='/' element={<ListItem/>} />
+          <Route exact path='/cart' element={<Cart/>} />
+          </Routes>
+        </CartContext.Provider>
+      </div>
+    </Router>
   );
 }
 
