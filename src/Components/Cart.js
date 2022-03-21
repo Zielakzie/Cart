@@ -84,7 +84,7 @@ function Cart() {
 
   return (
     <>
-      <h1>Cart</h1>
+      <h1 className="title">Cart</h1>
      {renderCheck > 0 ? cartItemsList() : <p>Add something :)</p>}
      <Link to="/">
         <button className="button-add cart-btn-width-fix text-uppercase">Back</button>
