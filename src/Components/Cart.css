@@ -39,3 +39,7 @@
   text-align: right;
   font-weight: bold;
 }
+
+.cart-btn-width-fix {
+  width: 120px
+}
