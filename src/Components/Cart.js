@@ -4,6 +4,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./Cart.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
+
 
 function Cart() {
   const { menu, setMenu, notyfication, setNotyfication } = useContext(CartContext);
@@ -76,6 +78,7 @@ function Cart() {
     ))}
     <div className="divider"></div>
     <p className="summary">{summary()}</p>
+
     </>
   }
 
@@ -83,7 +86,12 @@ function Cart() {
     <>
       <h1>Cart</h1>
      {renderCheck > 0 ? cartItemsList() : <p>Add something :)</p>}
-
+     <Link to="/">
+        <button className="button-add cart-btn-width-fix text-uppercase">Back</button>
+      </Link>
+      <Link to="/checkout">
+        <button className="button-add cart-btn-width-fix text-uppercase">Checkout</button>
+      </Link>
     </>
   );
 }
